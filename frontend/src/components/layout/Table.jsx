@@ -9,9 +9,7 @@ const HomeTable = (props) => {
   const { users, getUsers, updateUser, clearErrors,loading,message,deleteUser,clearMessages,userData } = useContext(AuthContext);
   const { setAlert } = useContext(AlertContext);
   useEffect(() => {
-    if (userData && userData.length !== 0) {
-props.history.push("/login")
-    }
+
   getUsers()
   }, []);
 
@@ -39,8 +37,10 @@ props.history.push("/login")
       clearMessages()
         getUsers();
       setAlert(message, "white", "#ff1436");
+    }    if (!userData && userData.length !== 0) {
+      props.history.push("/login");
     }
-  }, [Index,message]);
+  }, [Index,message,userData]);
  
  const { username, email, address } = user;
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
