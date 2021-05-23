@@ -10,10 +10,13 @@ import {
 import protect from "../middlewares/setAuthToken.js";
 router.post("/login", loginUser);
 router.post("/register", registerUser);
+ router
+   .route("/profile/:id")
+   .put(protect, updateUserDetails)
+   .delete(protect, deleteUserDetails);
 router
-  .route("/profile/:id")
+  .route("/profiles")
   .get(protect, getUserDetails)
-  .put(protect, updateUserDetails)
-  .delete(protect, deleteUserDetails)
+ 
 
 export default router;

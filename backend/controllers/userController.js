@@ -7,7 +7,6 @@ dotenv.config();
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-
   if (!user) {
     res.status(401);
     throw new Error("Invalid email or password");
@@ -24,14 +23,15 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 const getUserDetails = asyncHandler(async (req, res) => {
-  const { _id, username, email, address } = req.user;
-
-  res.json({
-    _id,
-    username,
-    email,
-    address,
-  });
+   const users = await User.find({}).select("-password");
+ 
+  if (!users) {
+    res.status(200);
+    throw new Error("Users not found");
+  } 
+  else{
+    res.json(users)
+  }
 });
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -53,8 +53,8 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 });
 const updateUserDetails = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
-
+  const user = await User.findById(req.params.id);
+console.log(user)
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
@@ -68,13 +68,7 @@ const updateUserDetails = asyncHandler(async (req, res) => {
 
     const updatedUser = await user.save();
 
-    res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-      token: generateToken(updatedUser._id),
-    });
+    res.json({message:"updated Successfully"});
   } else {
     res.status(404);
     throw new Error("User not found");
