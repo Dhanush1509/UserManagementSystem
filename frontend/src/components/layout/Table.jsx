@@ -4,12 +4,13 @@ import AlertContext from "../../context/alert/AlertContext";
 import { Modal, Button, Form, Table } from "react-bootstrap";
 import {TiUserDelete} from "react-icons/ti"
 import { RiEditBoxFill} from "react-icons/ri";
+import { hashHistory } from "react-router";
+
 import Spin from "./Spinner"
 const HomeTable = (props) => {
-  const { users, getUsers, updateUser, clearErrors,loading,message,deleteUser,clearMessages,userData } = useContext(AuthContext);
+  const { users, getUsers, updateUser, clearErrors,loading,message,deleteUser,clearMessages,userData ,isAuthenticated} = useContext(AuthContext);
   const { setAlert } = useContext(AlertContext);
   useEffect(() => {
-
   getUsers()
   }, []);
 
@@ -37,10 +38,9 @@ const HomeTable = (props) => {
       clearMessages()
         getUsers();
       setAlert(message, "white", "#ff1436");
-    }    if (!userData && userData.length !== 0) {
-      props.history.push("/login");
-    }
-  }, [Index,message,userData]);
+    }  
+     
+  }, [Index,message]);
  
  const { username, email, address } = user;
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });

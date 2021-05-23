@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://calm-escarpment-77403.herokuapp.com/"
+  "proxy": "http://localhost:5000/"
 }

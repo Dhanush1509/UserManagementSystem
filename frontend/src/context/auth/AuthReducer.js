@@ -19,7 +19,7 @@ const authReducer = (state, action) => {
         ...state,
         message: action.payload.message,
         isAuthenticated: true,
-        userData: action.payload,
+        userData: [action.payload],
         loading: false,
       };
     case LOGIN_USER:
@@ -27,7 +27,7 @@ const authReducer = (state, action) => {
         ...state,
         isAuthenticated: true,
         message: action.payload.message,
-        userData: action.payload,
+        userData: [action.payload],
         loading: false,
       };
       case DELETE_USER: return {

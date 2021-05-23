@@ -31,7 +31,7 @@ const Register = (props) => {
       setAlert(error, "white", "red");
       clearErrors();
     }
-     if (userData.length !== 0) {
+     if (userData&&userData.length !== 0) {
        props.history.push("/");
      }
 

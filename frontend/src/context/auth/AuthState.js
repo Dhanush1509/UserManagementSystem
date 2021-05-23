@@ -73,9 +73,10 @@ function AuthState(props) {
     }
   };
   const getUsers = async (id) => {
-    if (state.userData.token) {
-      setAuth(state.userData.token);
-    }
+    console.log(id)
+       if (state.userData[0].token) {
+         setAuth(state.userData[0].token);
+       }
     try {
       const { data } = await axios.get("/api/users/profiles");
       console.log(data);
@@ -93,8 +94,8 @@ function AuthState(props) {
   };
   const updateUser = async (id,formData) => {
     console.log(formData,id)
-    if (state.userData.token) {
-      setAuth(state.userData.token);
+    if (state.userData[0].token) {
+      setAuth(state.userData[0].token);
     }
     const config = {
       headers: {
@@ -117,8 +118,8 @@ function AuthState(props) {
     }
   };
    const deleteUser = async (id) => {
-     if (state.userData.token) {
-       setAuth(state.userData.token);
+     if (state.userData[0].token) {
+       setAuth(state.userData[0].token);
      }
   
      try {
