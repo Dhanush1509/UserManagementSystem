@@ -8,7 +8,7 @@ import { hashHistory } from "react-router";
 
 import Spin from "./Spinner"
 const HomeTable = (props) => {
-  const { users, getUsers, updateUser, clearErrors,loading,message,deleteUser,clearMessages,userData ,isAuthenticated} = useContext(AuthContext);
+  const { users, getUsers, updateUser, clearErrors,loading,message,deleteUser,clearMessages,userData ,isAuthenticated,error,logout} = useContext(AuthContext);
   const { setAlert } = useContext(AlertContext);
   useEffect(() => {
   getUsers()
@@ -39,8 +39,12 @@ const HomeTable = (props) => {
         getUsers();
       setAlert(message, "white", "#ff1436");
     }  
+    if(error==="jwt expired"){
+clearErrors();
+logout()
+    }
      
-  }, [Index,message]);
+  }, [Index,message,error]);
  
  const { username, email, address } = user;
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });

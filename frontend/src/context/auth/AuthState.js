@@ -158,7 +158,6 @@ function AuthState(props) {
   return (
     <AuthContext.Provider
       value={{
-        userDetails: state.userDetails,
         updateUser,
         logout,
         clearErrors,
