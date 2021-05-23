@@ -5,10 +5,13 @@ import { Modal, Button, Form, Table } from "react-bootstrap";
 import {TiUserDelete} from "react-icons/ti"
 import { RiEditBoxFill} from "react-icons/ri";
 import Spin from "./Spinner"
-const HomeTable = () => {
-  const { users, getUsers, updateUser, clearErrors,loading,message,deleteUser,clearMessages } = useContext(AuthContext);
+const HomeTable = (props) => {
+  const { users, getUsers, updateUser, clearErrors,loading,message,deleteUser,clearMessages,userData } = useContext(AuthContext);
   const { setAlert } = useContext(AlertContext);
   useEffect(() => {
+    if (userData && userData.length !== 0) {
+props.history.push("/login")
+    }
   getUsers()
   }, []);
 
